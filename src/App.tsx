@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { searchByQuery } from "./services/RestService"
 import { QueryParams } from "./interface/QueryParams" 
+import { ListOfSongCard } from "./components/ListOfSongCard"
 
 function App() {
   const [input, setInput] = useState("")
@@ -12,6 +13,7 @@ function App() {
 
   const handleSubmit = async (e:any) =>{
     e.preventDefault()
+    setInput("")
     const params:QueryParams={
       q: input,
       type: "track",
@@ -19,6 +21,7 @@ function App() {
       limit: 10,
     } 
     await searchByQuery(params).then((res:any) => {
+      console.log(res)
       setTracks(res.data.tracks.items)
     })
   }
@@ -30,9 +33,7 @@ function App() {
        <input type="text" onChange={handleChange}/>
        <button type="submit">Buscar</button>
      </form>
-     {tracks.map((track:any, idx) => {
-       return <p key={idx}>{track.name}</p>
-     })}
+     <ListOfSongCard tracks={tracks}/>
     </div>
   );
 }
