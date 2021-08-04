@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { searchByQuery } from "./services/RestService"
 import { QueryParams } from "./interface/QueryParams" 
+// components
+import { SearchBar } from "./components/SearchBar"
 import { ListOfSongCard } from "./components/ListOfSongCard"
 
 function App() {
@@ -29,10 +31,7 @@ function App() {
   return (
     <div className="App">
      <h1>Buscador de canciones</h1>
-     <form onSubmit={handleSubmit}>
-       <input type="text" onChange={handleChange}/>
-       <button type="submit">Buscar</button>
-     </form>
+     <SearchBar handleSubmit={handleSubmit} handleChange={handleChange}/>
      <ListOfSongCard tracks={tracks}/>
     </div>
   );
