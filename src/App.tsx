@@ -1,38 +1,30 @@
-import { useState } from 'react';
-import { searchByQuery } from "./services/RestService"
-import { QueryParams } from "./interface/QueryParams" 
+import { useState } from "react";
+// hooks
+import { useSearchSong } from "./hooks/useSearchSong";
 // components
-import { SearchBar } from "./components/SearchBar"
-import { ListOfSongCard } from "./components/ListOfSongCard"
+import { SearchBar } from "./components/SearchBar";
+import { ListOfSongCard } from "./components/ListOfSongCard";
 
 function App() {
-  const [input, setInput] = useState("")
-  const [tracks, setTracks] = useState([])
+  const [input, setInput] = useState("");
+  const { searchSong, isLoading, tracks } = useSearchSong();
 
-  const handleChange = (e:any) =>{
-    setInput(e.target.value)
-  }
+  const handleChange = (e: any) => {
+    setInput(e.target.value);
+  };
 
-  const handleSubmit = async (e:any) =>{
-    e.preventDefault()
-    setInput("")
-    const params:QueryParams={
-      q: input,
-      type: "track",
-      market: "US", 
-      limit: 10,
-    } 
-    await searchByQuery(params).then((res:any) => {
-      console.log(res)
-      setTracks(res.data.tracks.items)
-    })
-  }
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    setInput("");
+    await searchSong(input);
+  };
 
   return (
     <div className="App">
-     <h1>Buscador de canciones</h1>
-     <SearchBar handleSubmit={handleSubmit} handleChange={handleChange}/>
-     <ListOfSongCard tracks={tracks}/>
+      <h1>Buscador de canciones</h1>
+      {isLoading && <p>cargando...</p>}
+      <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
+      <ListOfSongCard tracks={tracks} />
     </div>
   );
 }

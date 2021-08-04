@@ -9,7 +9,7 @@ const Authorization =
 
 const data = { grant_type: "client_credentials" };
 
-const authOptions:AxiosRequestConfig = {
+const authOptions: AxiosRequestConfig = {
   method: "POST",
   headers: {
     "content-type": "application/x-www-form-urlencoded",
@@ -19,7 +19,6 @@ const authOptions:AxiosRequestConfig = {
   url: "https://accounts.spotify.com/api/token",
 };
 
-
 export const getToken = async () => {
-    return await axios(authOptions)
+  return await axios(authOptions);
 };
