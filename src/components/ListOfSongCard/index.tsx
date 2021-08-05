@@ -1,15 +1,11 @@
 import { FC } from "react";
+// npm
 import Loader from "react-loader-spinner";
+import { FaSearch } from "react-icons/fa";
+// components
 import { SongCard } from "../SongCard";
-
-import styled from "styled-components";
-
-export const Container = styled.div`
-  width: 90%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+// styles
+import { Container, Message } from "./styles";
 
 interface Props {
   tracks: any[];
@@ -19,15 +15,20 @@ interface Props {
 export const ListOfSongCard: FC<Props> = ({ tracks, isLoading }) => {
   return (
     <Container>
-      {isLoading && (
+      {isLoading ? (
         <div style={{ marginTop: 100 }}>
           <Loader type="Puff" color="#1DB954" height={50} width={50} />
         </div>
+      ) : tracks.length === 0 ? (
+        <Message>
+          <FaSearch style={{ fontSize: 50 }} />
+          <p>Encuentra tus canciones preferidas</p>
+        </Message>
+      ) : (
+        tracks.map((track: any, idx: number) => {
+          return <SongCard key={idx} {...track} />;
+        })
       )}
-      
-      {tracks.map((track: any, idx: number) => {
-        return <SongCard key={idx} {...track} />;
-      })}
     </Container>
   );
 };
