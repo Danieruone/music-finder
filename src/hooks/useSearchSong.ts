@@ -1,12 +1,13 @@
 import { useState } from "react";
 // services
-import { searchByQuery } from "../services/RestService";
+import { searchByQuery, getAnotherPage } from "../services/RestService";
 // interfaces
 import { QueryParams } from "../interface/QueryParams";
 
 export const useSearchSong = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [tracks, setTracks] = useState([]);
+  const [paginationData, setpaginationData] = useState();
 
   const searchSong = async (input: string) => {
     setIsLoading(true);
@@ -18,10 +19,28 @@ export const useSearchSong = () => {
     };
     await searchByQuery(params).then((res: any) => {
       console.log(res);
+      setpaginationData(res.data.tracks);
       setTracks(res.data.tracks.items);
     });
     setIsLoading(false);
   };
 
-  return { searchSong, isLoading, tracks, setTracks };
+  const changePage = async (url: string) => {
+    setIsLoading(true);
+    await getAnotherPage(url).then((res: any) => {
+      console.log(res);
+      setpaginationData(res.data.tracks);
+      setTracks(res.data.tracks.items);
+    });
+    setIsLoading(false);
+  };
+
+  return {
+    searchSong,
+    isLoading,
+    tracks,
+    setTracks,
+    paginationData,
+    changePage,
+  };
 };
