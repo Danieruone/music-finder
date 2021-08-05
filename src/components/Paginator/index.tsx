@@ -18,8 +18,10 @@ export const Paginator: FC<Props> = ({
   setCurrentPage,
 }) => {
   const handleNextPage = async () => {
-    setCurrentPage(currentPage + 1);
-    await changePage(paginationData.next);
+    if (paginationData.next !== null) {
+      setCurrentPage(currentPage + 1);
+      await changePage(paginationData.next);
+    }
   };
 
   const handlePrevPage = async () => {
