@@ -18,6 +18,7 @@ export const Main = () => {
     setTracks,
     paginationData,
     changePage,
+    resetCurrentPage
   } = useSearchSong();
 
   const handleChange = (e: any) => {
@@ -26,8 +27,9 @@ export const Main = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    setTracks([]);
     if (input !== "") {
+      setInput("")
+      setTracks([]);
       await searchSong(input);
     }
   };
@@ -44,6 +46,7 @@ export const Main = () => {
         isLoading={isLoading}
         paginationData={paginationData}
         changePage={changePage}
+        resetCurrentPage={resetCurrentPage}
       />
     </Container>
   );

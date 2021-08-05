@@ -7,12 +7,14 @@ import { SongCard } from "../SongCard";
 import { Paginator } from "../Paginator";
 // styles
 import { Container, Message, Content } from "./styles";
+import { useEffect } from "react";
 
 interface Props {
   tracks: any[];
   isLoading: boolean;
   paginationData: any;
   changePage: any;
+  resetCurrentPage: boolean;
 }
 
 export const ListOfSongCard: FC<Props> = ({
@@ -20,8 +22,14 @@ export const ListOfSongCard: FC<Props> = ({
   isLoading,
   paginationData,
   changePage,
+  resetCurrentPage,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [resetCurrentPage]);
+
   return (
     <Container>
       {isLoading ? (
