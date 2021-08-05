@@ -9,13 +9,18 @@ interface Props {
 
 export const SearchBar: FC<Props> = ({ handleSubmit, handleChange }) => {
   const inputField = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const submit = (e:any) => {
-    handleSubmit(e)
-    inputField.current.value = ""
-  }
+  const submit = (e: any) => {
+    handleSubmit(e);
+    inputField.current.value = "";
+  };
   return (
     <Container onSubmit={submit}>
-      <input type="text" placeholder="Nombre de la canción..." ref={inputField} onChange={handleChange} />
+      <input
+        type="text"
+        placeholder="Nombre de la canción..."
+        ref={inputField}
+        onChange={handleChange}
+      />
       <button type="submit">Buscar</button>
     </Container>
   );

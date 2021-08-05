@@ -23,5 +23,5 @@ export const useSearchSong = () => {
     setIsLoading(false);
   };
 
-  return { searchSong, isLoading, tracks };
+  return { searchSong, isLoading, tracks, setTracks };
 };

@@ -11,7 +11,7 @@ import itunesicon from  "../../assets/icons/itunes.svg"
 
 export const Main = () => {
   const [input, setInput] = useState("");
-  const { searchSong, isLoading, tracks } = useSearchSong();
+  const { searchSong, isLoading, tracks, setTracks } = useSearchSong();
 
   const handleChange = (e: any) => {
     setInput(e.target.value);
@@ -19,6 +19,7 @@ export const Main = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+    setTracks([])
     if(input !== ""){
       await searchSong(input);
     }

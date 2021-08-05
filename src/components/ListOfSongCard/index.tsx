@@ -20,7 +20,7 @@ export const ListOfSongCard: FC<Props> = ({ tracks, isLoading }) => {
   return (
     <Container>
       {isLoading && (
-        <div style={{ marginTop: 200 }}>
+        <div style={{ marginTop: 100 }}>
           <Loader type="Puff" color="#1DB954" height={50} width={50} />
         </div>
       )}
