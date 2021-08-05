@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, Fragment } from "react";
 // npm
 import Loader from "react-loader-spinner";
 import { FaSearch } from "react-icons/fa";
@@ -34,12 +34,12 @@ export const ListOfSongCard: FC<Props> = ({
   }, [resetCurrentPage]);
 
   return (
-    <>
+    <Fragment>
       {showModal && <SongDetail track={detailTrack} setShowModal={setShowModal}/>}
       <Container>
         {isLoading ? (
           <div style={{ marginTop: 100 }}>
-            <Loader type="Puff" color="#070707" height={50} width={50} />
+            <Loader type="Puff" color="#1DB954" height={50} width={50} />
           </div>
         ) : tracks.length === 0 ? (
           <Message>
@@ -67,6 +67,6 @@ export const ListOfSongCard: FC<Props> = ({
           </Content>
         )}
       </Container>
-    </>
+    </Fragment>
   );
 };
