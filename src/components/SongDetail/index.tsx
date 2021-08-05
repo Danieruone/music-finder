@@ -12,7 +12,7 @@ export const SongDetail: FC<Props> = ({ track, setShowModal }) => {
   return (
     <Container>
       <Card>
-        <div onClick={() => setShowModal(false)}>
+        <div onClick={() => setShowModal(false)} data-test-id="close-modal">
           <FaTimes
             style={{ fontSize: 20, marginBottom: 20, cursor: "pointer" }}
           />

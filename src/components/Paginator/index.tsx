@@ -33,13 +33,13 @@ export const Paginator: FC<Props> = ({
 
   return (
     <Container>
-      <div onClick={handlePrevPage}>
+      <div onClick={handlePrevPage} data-test-id="left-arrow">
         <FaArrowLeft />
       </div>
       <span>
         Página {currentPage} de {paginationData.total / 10}
       </span>
-      <div onClick={handleNextPage}>
+      <div onClick={handleNextPage} data-test-id="right-arrow">
         <FaArrowRight />
       </div>
     </Container>

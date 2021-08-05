@@ -1,4 +1,4 @@
-import { FC, Fragment } from "react";
+import { FC } from "react";
 // styles
 import { Container } from "./styles";
 
@@ -19,14 +19,12 @@ export const SongCard: FC<Props> = ({
   };
 
   return (
-    <Fragment>
-      <Container onClick={handleClick}>
-        <img src={track.album.images[1].url} alt="Song's album" />
-        <div>
-          <h2>{track.name}</h2>
-          <span>By {track.artists[0].name}</span>
-        </div>
-      </Container>
-    </Fragment>
+    <Container onClick={handleClick} data-test-id="songcard">
+      <img src={track.album.images[1].url} alt="Song's album" />
+      <div>
+        <h2>{track.name}</h2>
+        <span>By {track.artists[0].name}</span>
+      </div>
+    </Container>
   );
 };
