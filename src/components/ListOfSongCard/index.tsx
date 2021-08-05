@@ -1,18 +1,27 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 // npm
 import Loader from "react-loader-spinner";
 import { FaSearch } from "react-icons/fa";
 // components
 import { SongCard } from "../SongCard";
+import { Paginator } from "../Paginator";
 // styles
-import { Container, Message } from "./styles";
+import { Container, Message, Content } from "./styles";
 
 interface Props {
   tracks: any[];
   isLoading: boolean;
+  paginationData: any;
+  changePage: any;
 }
 
-export const ListOfSongCard: FC<Props> = ({ tracks, isLoading }) => {
+export const ListOfSongCard: FC<Props> = ({
+  tracks,
+  isLoading,
+  paginationData,
+  changePage,
+}) => {
+  const [currentPage, setCurrentPage] = useState(1);
   return (
     <Container>
       {isLoading ? (
@@ -25,9 +34,17 @@ export const ListOfSongCard: FC<Props> = ({ tracks, isLoading }) => {
           <p>Encuentra tus canciones preferidas</p>
         </Message>
       ) : (
-        tracks.map((track: any, idx: number) => {
-          return <SongCard key={idx} {...track} />;
-        })
+        <Content>
+          {tracks.map((track: any, idx: number) => {
+            return <SongCard key={idx} {...track} />;
+          })}
+          <Paginator
+            paginationData={paginationData}
+            changePage={changePage}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </Content>
       )}
     </Container>
   );

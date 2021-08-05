@@ -14,3 +14,10 @@ export const Message = styled.div`
   align-items: center;
   margin-top: 100px;
 `;
+
+export const Content = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

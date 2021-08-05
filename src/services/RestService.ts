@@ -19,3 +19,20 @@ export const searchByQuery = async (params: QueryParams) => {
     console.log(e);
   }
 };
+
+export const getAnotherPage = async (url:string) => {
+  try {
+    const res = await getToken();
+    const token = res.data.access_token;
+    const options: AxiosRequestConfig = {
+      method: "GET",
+      url,
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    };
+    return await axios(options);
+  } catch (e) {
+    console.log(e);
+  }
+};
