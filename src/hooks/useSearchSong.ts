@@ -8,9 +8,11 @@ export const useSearchSong = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [tracks, setTracks] = useState([]);
   const [paginationData, setpaginationData] = useState();
+  const [resetCurrentPage, setResetCurrentPage] = useState(false);
 
   const searchSong = async (input: string) => {
     setIsLoading(true);
+    setResetCurrentPage(!resetCurrentPage);
     const params: QueryParams = {
       q: input,
       type: "track",
@@ -42,5 +44,6 @@ export const useSearchSong = () => {
     setTracks,
     paginationData,
     changePage,
+    resetCurrentPage,
   };
 };
