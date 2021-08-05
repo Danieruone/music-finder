@@ -5,6 +5,7 @@ import { FaSearch } from "react-icons/fa";
 // components
 import { SongCard } from "../SongCard";
 import { Paginator } from "../Paginator";
+import { SongDetail } from "../SongDetail";
 // styles
 import { Container, Message, Content } from "./styles";
 import { useEffect } from "react";
@@ -25,35 +26,47 @@ export const ListOfSongCard: FC<Props> = ({
   resetCurrentPage,
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [detailTrack, setDetailTrack] = useState({});
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [resetCurrentPage]);
 
   return (
-    <Container>
-      {isLoading ? (
-        <div style={{ marginTop: 100 }}>
-          <Loader type="Puff" color="#1DB954" height={50} width={50} />
-        </div>
-      ) : tracks.length === 0 ? (
-        <Message>
-          <FaSearch style={{ fontSize: 50 }} />
-          <p>Encuentra tus canciones preferidas</p>
-        </Message>
-      ) : (
-        <Content>
-          {tracks.map((track: any, idx: number) => {
-            return <SongCard key={idx} {...track} />;
-          })}
-          <Paginator
-            paginationData={paginationData}
-            changePage={changePage}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        </Content>
-      )}
-    </Container>
+    <>
+      {showModal && <SongDetail track={detailTrack} setShowModal={setShowModal}/>}
+      <Container>
+        {isLoading ? (
+          <div style={{ marginTop: 100 }}>
+            <Loader type="Puff" color="#070707" height={50} width={50} />
+          </div>
+        ) : tracks.length === 0 ? (
+          <Message>
+            <FaSearch style={{ fontSize: 50 }} />
+            <p>Encuentra tus canciones preferidas</p>
+          </Message>
+        ) : (
+          <Content>
+            {tracks.map((track: any, idx: number) => {
+              return (
+                <SongCard
+                  key={idx}
+                  track={track}
+                  setDetailTrack={setDetailTrack}
+                  setShowModal={setShowModal}
+                />
+              );
+            })}
+            <Paginator
+              paginationData={paginationData}
+              changePage={changePage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </Content>
+        )}
+      </Container>
+    </>
   );
 };

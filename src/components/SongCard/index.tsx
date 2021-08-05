@@ -1,21 +1,32 @@
-import { FC } from "react";
+import { FC, Fragment } from "react";
 // styles
 import { Container } from "./styles";
 
 interface Props {
-  name: string;
-  album: any;
-  artists: any;
+  track: any;
+  setDetailTrack: any;
+  setShowModal: any;
 }
 
-export const SongCard: FC<Props> = ({ name, album, artists }) => {
+export const SongCard: FC<Props> = ({
+  track,
+  setDetailTrack,
+  setShowModal,
+}) => {
+  const handleClick = () => {
+    setDetailTrack(track);
+    setShowModal(true);
+  };
+
   return (
-    <Container>
-      <img src={album.images[1].url} alt="Song's album" />
-      <div>
-        <h2>{name}</h2>
-        <span>By {artists[0].name}</span>
-      </div>
-    </Container>
+    <Fragment>
+      <Container onClick={handleClick}>
+        <img src={track.album.images[1].url} alt="Song's album" />
+        <div>
+          <h2>{track.name}</h2>
+          <span>By {track.artists[0].name}</span>
+        </div>
+      </Container>
+    </Fragment>
   );
 };
