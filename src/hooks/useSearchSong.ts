@@ -1,5 +1,7 @@
 import { useState } from "react";
+// services
 import { searchByQuery } from "../services/RestService";
+// interfaces
 import { QueryParams } from "../interface/QueryParams";
 
 export const useSearchSong = () => {

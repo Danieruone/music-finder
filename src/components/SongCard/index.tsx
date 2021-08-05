@@ -5,13 +5,17 @@ import { Container } from "./styles";
 interface Props {
   name: string;
   album: any;
+  artists: any;
 }
 
-export const SongCard: FC<Props> = ({ name, album }) => {
+export const SongCard: FC<Props> = ({ name, album, artists }) => {
   return (
     <Container>
       <img src={album.images[1].url} alt="Song's album" />
-      <h2>{name}</h2>
+      <div>
+        <h2>{name}</h2>
+        <span>By {artists[0].name}</span>
+      </div>
     </Container>
   );
 };
