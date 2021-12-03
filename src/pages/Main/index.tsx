@@ -38,7 +38,7 @@ export const Main = () => {
     <Container>
       <Title>
         <img src={itunesicon} alt="Itunes icon" />
-        <h1>Music Finder</h1>
+        <h1>Music Finderrr</h1>
       </Title>
       <SearchBar handleSubmit={handleSubmit} handleChange={handleChange} />
       <ListOfSongCard
